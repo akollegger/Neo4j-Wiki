@@ -1,0 +1,1890 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd" version="0.5" xml:lang="en">
+  <siteinfo>
+    <sitename>Neo4j Wiki</sitename>
+    <base>http://wiki.neo4j.org/content/Main_Page</base>
+    <generator>MediaWiki 1.17.0</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Neo4j Wiki</namespace>
+      <namespace key="5" case="first-letter">Neo4j Wiki talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Find things close to me</title>
+    <id>353</id>
+    <redirect />
+    <revision>
+      <id>3735</id>
+      <timestamp>2011-03-06T14:07:34Z</timestamp>
+      <contributor>
+        <username>Craig.taverner</username>
+        <id>456</id>
+      </contributor>
+      <comment>[[Find things close to me]] moved to [[Finding things close to other things]]: Need a title that is more catchy, and makes people wonder</comment>
+      <text xml:space="preserve" bytes="50">#REDIRECT [[Finding things close to other things]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started</title>
+    <id>232</id>
+    <revision>
+      <id>3556</id>
+      <timestamp>2010-12-28T14:04:21Z</timestamp>
+      <contributor>
+        <username>Dmontag</username>
+        <id>462</id>
+      </contributor>
+      <text xml:space="preserve" bytes="930">{|class=&quot;getting-started&quot;
+ |style=&quot;font-size:2em;&quot; | Stand-alone server
+ |colspan=&quot;3&quot; | {{#img: image=Neo4j-Server.png | page=Getting Started With Neo4j Server | title=Getting Started with Neo4j Server }}&lt;br/&gt;[[Getting Started With Neo4j Server|Getting started with Neo4j Server]]&lt;br/&gt;[[Using the Neo4j Server with Java]]&lt;br/&gt;[[Using the Neo4j Server with Ruby]]
+ |-
+ |style=&quot;font-size:2em;&quot; | Embedded
+ | {{#img: image=java-logo.png | page=Getting Started With Java | title=Getting Started with Java }}&lt;br/&gt;[[Getting Started With Java|Getting started with Neo4j in Java]]
+ | {{#img: image=Python-logo.png | page=Getting Started With Python  | title=Getting Started with Python }}&lt;br/&gt;[[Getting Started With Python|Getting started with Neo4j in Python]]
+ | {{#img: image=ruby-logo.png | page=Getting Started With Ruby | title=Getting Started with Ruby }}&lt;br/&gt;[[Getting Started With Ruby|Getting started with Neo4j in Ruby]]
+ |-
+|}</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started Guide</title>
+    <id>11</id>
+    <redirect />
+    <revision>
+      <id>3527</id>
+      <timestamp>2010-12-08T12:07:27Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>Redirecting to [[Getting Started]]</comment>
+      <text xml:space="preserve" bytes="29">#REDIRECT [[Getting Started]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started In One Minute Guide</title>
+    <id>12</id>
+    <revision>
+      <id>3224</id>
+      <timestamp>2010-10-11T15:19:52Z</timestamp>
+      <contributor>
+        <username>Andres</username>
+        <id>552</id>
+      </contributor>
+      <text xml:space="preserve" bytes="2411">This is a compressed summary of the slightly more verbose [[Getting Started Guide]].
+Please refer to the full guide if something here is unclear.
+
+* If you &lt;b&gt;don't&lt;/b&gt; use Maven: [http://neo4j.org/download/ Download] the Neo4j release and add the Neo4j kernel and JTA jars to your classpath.
+
+* If you &lt;b&gt;do&lt;/b&gt; use Maven: Check the Maven2 info [[Getting Started Guide#If_you_use_Maven|here]] and add it to your &lt;code&gt;pom.xml&lt;/code&gt;.
+
+* If you want some commonly used Neo4j components bundled right away, check out the [[Getting Started With Neo4j]] guide before downloading/configuring anything.
+
+* Declare your relationship types and start Neo4j (the complete code is here: [[One Minute Guide Complete Code]]):
+
+&lt;pre class=&quot;brush: java&quot;&gt;
+public enum MyRelationshipTypes implements RelationshipType
+{
+    KNOWS
+}
+...
+GraphDatabaseService graphDb = new EmbeddedGraphDatabase( &quot;var/base&quot; ); 
+&lt;/pre&gt;
+
+* Create a small graph:
+
+&lt;pre class=&quot;brush: java&quot;&gt;
+Node firstNode = graphDb.createNode();
+Node secondNode = graphDb.createNode();
+Relationship relationship = firstNode.createRelationshipTo( secondNode, MyRelationshipTypes.KNOWS );
+
+firstNode.setProperty( &quot;message&quot;, &quot;Hello, &quot; );
+secondNode.setProperty( &quot;message&quot;, &quot;world!&quot; );
+relationship.setProperty( &quot;message&quot;, &quot;brave Neo4j &quot; );
+&lt;/pre&gt;
+
+* Recall that Neo4j is fully transactional, so wrap everything in [[Transactions|transactions]]:
+
+&lt;pre class=&quot;brush: java&quot;&gt;
+Transaction tx = graphDb.beginTx();
+try
+{
+   // all Neo4j operations that work with the graph, for example:
+   // Node firstNode = graphDb.createNode();
+   // ... etc ...
+   tx.success();
+}
+finally
+{
+   tx.finish();
+   graphDb.shutdown();
+}
+&lt;/pre&gt;
+
+* Print the result and you're done:
+
+&lt;pre class=&quot;brush: java&quot;&gt;
+System.out.print( firstNode.getProperty( &quot;message&quot; ) );
+System.out.print( relationship.getProperty( &quot;message&quot; ) );
+System.out.print( secondNode.getProperty( &quot;message&quot; ) );
+&lt;/pre&gt;
+
+Now, you can move on to more detailed information:
+
+* the [[Getting Started Guide|verbose version]] of this guide
+
+* the [[One Minute Guide Complete Code|complete code]]
+
+* the javadocs at http://api.neo4j.org/current
+
+* the [http://dist.neo4j.org/basic-neo4j-code-examples-2008-05-08.pdf basic code snippets PDF] to learn the traverser framework
+
+* the [[Shell|guide to the Shell]]
+
+* the [http://neo4j.org/doc documentation page]
+
+Finally, be sure to sign up on the [http://lists.neo4j.org mailing list].</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started JRuby</title>
+    <id>237</id>
+    <redirect />
+    <revision>
+      <id>2595</id>
+      <timestamp>2010-03-30T09:28:22Z</timestamp>
+      <contributor>
+        <username>Peterneubauer</username>
+        <id>418</id>
+      </contributor>
+      <comment>[[Getting Started JRuby]] moved to [[Getting Started Ruby]]</comment>
+      <text xml:space="preserve" bytes="34">#REDIRECT [[Getting Started Ruby]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started Python</title>
+    <id>225</id>
+    <redirect />
+    <revision>
+      <id>3385</id>
+      <timestamp>2010-11-18T14:33:36Z</timestamp>
+      <contributor>
+        <username>AndreasKollegger</username>
+        <id>553</id>
+      </contributor>
+      <comment>Redirecting to [[Getting Started With Python]]</comment>
+      <text xml:space="preserve" bytes="41">#REDIRECT [[Getting Started With Python]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started REST</title>
+    <id>250</id>
+    <revision>
+      <id>4279</id>
+      <timestamp>2011-09-02T07:09:10Z</timestamp>
+      <contributor>
+        <username>Peterneubauer</username>
+        <id>418</id>
+      </contributor>
+      <text xml:space="preserve" bytes="278">&lt;blockquote&gt;
+Note that this guide is now deprecated, and has been superceded by the [http://docs.neo4j.org/chunked/snapshot/server.html Neo4j manual Server sections] and full manual docs of the [http://docs.neo4j.org/chunked/snapshot/rest-api.html Neo4j REST API].
+&lt;/blockquote&gt;</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started Ruby</title>
+    <id>233</id>
+    <redirect />
+    <revision>
+      <id>3378</id>
+      <timestamp>2010-11-18T14:13:27Z</timestamp>
+      <contributor>
+        <username>AndreasKollegger</username>
+        <id>553</id>
+      </contributor>
+      <comment>Redirecting to [[Getting Started With Ruby]]</comment>
+      <text xml:space="preserve" bytes="39">#REDIRECT [[Getting_Started_With_Ruby]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started Scala</title>
+    <id>238</id>
+    <revision>
+      <id>2626</id>
+      <timestamp>2010-03-30T11:34:24Z</timestamp>
+      <contributor>
+        <username>Peterneubauer</username>
+        <id>418</id>
+      </contributor>
+      <text xml:space="preserve" bytes="198">For more info on the Scala bindings, please refer to the [http://github.com/ept/neo4j-resources Neo4j Scala Resources] and [http://github.com/ept/neo4j-scala-template Neo4j Scala Template] projects.</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started With Apoc</title>
+    <id>150</id>
+    <redirect />
+    <revision>
+      <id>3221</id>
+      <timestamp>2010-10-11T15:10:35Z</timestamp>
+      <contributor>
+        <username>Andres</username>
+        <id>552</id>
+      </contributor>
+      <comment>Redirecting to [[Getting Started With Neo4j]]</comment>
+      <text xml:space="preserve" bytes="40">#REDIRECT [[Getting_Started_With_Neo4j]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Getting Started with Neo4j Server</title>
+    <id>329</id>
+    <redirect />
+    <revision>
+      <id>3426</id>
+      <timestamp>2010-11-18T20:52:42Z</timestamp>
+      <contributor>
+        <username>AndreasKollegger</username>
+        <id>553</id>
+      </contributor>
+      <comment>Redirecting to [[Getting Started With Neo4j Server]]</comment>
+      <text xml:space="preserve" bytes="47">#REDIRECT [[Getting Started With Neo4j Server]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Graph-algo Guide</title>
+    <id>124</id>
+    <redirect />
+    <revision>
+      <id>933</id>
+      <timestamp>2008-09-25T13:11:06Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Graph-algo Guide]] moved to [[Graph-algo]]</comment>
+      <text xml:space="preserve" bytes="24">#REDIRECT [[Graph-algo]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Graph-algo shortest path exampes</title>
+    <id>122</id>
+    <redirect />
+    <revision>
+      <id>920</id>
+      <timestamp>2008-09-19T12:39:56Z</timestamp>
+      <contributor>
+        <username>Patrik</username>
+        <id>17</id>
+      </contributor>
+      <comment>[[Graph-algo shortest path exampes]] moved to [[Graph-algo shortest path examples]]: Typo.</comment>
+      <text xml:space="preserve" bytes="47">#REDIRECT [[Graph-algo shortest path examples]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Graph Data Model</title>
+    <id>202</id>
+    <revision>
+      <id>2128</id>
+      <timestamp>2010-01-22T13:08:18Z</timestamp>
+      <contributor>
+        <username>Tobias</username>
+        <id>15</id>
+      </contributor>
+      <text xml:space="preserve" bytes="4565">&lt;blockquote&gt;
+This page is in work right now. Don't consider it correct until this notice is deleted.
+&lt;/blockquote&gt;
+
+The data model represented by Neo4j is that of a [http://en.wikipedia.org/wiki/Graph_(data_structure) Graph] (or Network) of interconnected nodes. More formally Neo4j implements a persistent [http://en.wikipedia.org/wiki/Multigraph edge-labeled multidigraph]. The Graph Data Model of the Neo4j Graph Database consists of three fundamental datatypes: Nodes, Relationships and Properties. Nodes connect to each other through relationships. Relationships are directed connections in between two nodes. Relationships can be traversed with equal speed in both the incoming or outgoing direction (or treated as not having a particular direction) and have a RelationshipType that is used for adding semantics to the connections and the traversals thereof. Properties are values associated with a particular node or relationship by a string key. A node or relationship may have an arbitrary set of properties associated with it, there is no enforcement of structure for the set of properties. The valid values types for properties in the basic configuration of the Neo4j Graph Database are primitive values (booleans and 1, 2, 4 or 8 bit signed integers and 4 or 8 bit floating point numbers), strings, and homogenous arrays of primitive values or strings.
+
+== Nodes ==
+
+Nodes are also known as [http://en.wikipedia.org/wiki/Vertex_(graph_theory) vertices] in graph theory.
+
+Nodes in Neo4j do not have explicit types, instead the data types of the entity represented by a node is determined by it's navigational context, i.e. how the node is reached.
+
+== Relationships ==
+
+Relationships are also known as links, connections, or [http://en.wikipedia.org/wiki/Graph_theory edges in graph theory].
+
+Relationships in Neo4j have navigational types, these are not data types, and no enforcement of the set of properties for the relationship is done based on the type by the database. The relationship types are important for traversing the graph, instead of traversing all relationships from a node, the traversal can be limited to a (set of) specific relationship type(s).
+
+=== Relationship Types ===
+
+== Properties ==
+
+=== Valid value types in the Neo4j Graph Database ===
+
+{| class=&quot;wikitable&quot; border=&quot;1&quot;
+! Type name
+! Description
+! Size in JVM
+! valid values
+! On disk record size
+|-
+| '''boolean'''
+| boolean value
+| 4 bytes
+| &lt;code&gt;true&lt;/code&gt;/&lt;code&gt;false&lt;/code&gt;
+| 25 bytes
+|-
+| '''byte'''
+| Signed minimal integer
+| 4 bytes
+| 1 signed byte, -128 to 127 (inclusive)
+| 25 bytes
+|-
+| '''short'''
+| Signed small integer
+| 4 bytes
+| 2 signed bytes, &lt;code&gt;-32 768&lt;/code&gt; to &lt;code&gt;32 767&lt;/code&gt; (inclusive)
+| 25 bytes
+|-
+| '''int'''
+| Signed integer
+| 4 bytes
+| 4 signed bytes, &lt;code&gt;-2 147 483 648&lt;/code&gt; to &lt;code&gt;2 147 483 647&lt;/code&gt; (inclusive)
+| 25 bytes
+|-
+| '''long'''
+| Signed large integer
+| 8 bytes
+| 8 signed bytes, &lt;code&gt;-9 223 372 036 854 775 808&lt;/code&gt; to &lt;code&gt;9 223 372 036 854 775 807&lt;/code&gt; (inclusive)
+| 25 bytes
+|-
+| '''char'''
+| unicode character / unsigned small integer
+| 4 bytes
+| &lt;code&gt;'\x0000'&lt;/code&gt; to &lt;code&gt;'\xFFFF'&lt;/code&gt; (2 unsigned bytes)
+| 25 bytes
+|-
+| '''float'''
+| Single precision floating point number
+| 4 bytes
+| [http://en.wikipedia.org/wiki/Floating_point#IEEE_754:_floating_point_in_modern_computers see wikipedia]
+| 25 bytes
+|-
+| '''double'''
+| Double precision floating point number
+| 8 bytes
+| [http://en.wikipedia.org/wiki/Floating_point#IEEE_754:_floating_point_in_modern_computers see wikipedia]
+| 25 bytes
+|-
+| '''String'''
+| Text, sequence of characters.
+| length * 2 bytes + 8 bytes
+| Any text string, of any length (preferably not huge)
+|-
+! colspan=&quot;5&quot; | Array types
+|-
+| '''boolean[]'''
+| Array of boolean values
+| 8 bytes + ( length * 1 bit, rounded up to nearest 4 bytes)
+|-
+| '''byte[]'''
+| Signed minimal integer
+| 8 bytes + ( length * 1 byte, rounded up to nearest 4 bytes)
+|-
+| '''short[]'''
+| Signed small integer
+| 8 bytes + ( length * 2 byte, rounded up to nearest 4 bytes)
+|-
+| '''int[]'''
+| Signed integer
+| length + 8 bytes
+|-
+| '''long[]'''
+| Signed large integer
+| length * 2 + 8 bytes
+|-
+| '''char[]'''
+| Array of unicode characters
+| 8 bytes + ( length * 2 byte, rounded up to nearest 4 bytes)
+|-
+| '''float[]'''
+| Array of floating point numbers
+| length + 8 bytes
+|-
+| '''double[]'''
+| Array of high precision floating point numbers
+| length * 2 + 8 bytes
+|-
+| '''String[]'''
+| Array of text strings, sequences of characters
+|}
+
+== See also ==
+
+* Storage model
+* Transaction / isolation model</text>
+    </revision>
+  </page>
+  <page>
+    <title>Guidelines for Building a Neo4j Application</title>
+    <id>36</id>
+    <revision>
+      <id>2109</id>
+      <timestamp>2010-01-21T13:45:44Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <minor/>
+      <comment>[[Guidelines for Building a Neo App]] moved to [[Guidelines for Building a Neo4j Application]]</comment>
+      <text xml:space="preserve" bytes="4845">The goal of this document is to provide a condensed set of guidelines for people who are familiar with the basics of Neo4j, but don't feel entirely confident on how to put their skills to use in a real-world application. It works on a ''macro''- rather than a ''micro'' scale and tries to convey a mindset rather than specific details. If you want code-level patterns, see the HOWTOs.
+
+&lt;blockquote&gt;
+Please note that this is a very early draft version that is no more than half done. In the near future, we're going to make a real effort to shape up our documentation, including this guide. Until then, your best bet is to read through whatever is here, then check out the [[Design Guide]].
+&lt;/blockquote&gt;
+
+== Mindset ==
+
+[[Image:Whiteboard-bjorns-life.png|thumb|right| A domain model of one CTO's life]]
+Like most (all?) programmers today, you were probably born and raised in an RDBMS world. Having been fostered in a world where the bottom layer of all architectural diagrams is the &quot;SQL sink,&quot; you most likely carry with you a number of assumptions. The challenge is to let go of those hidden assumptions as you now work with an architecture without a 35 year old legacy. This section includes a set of guidelines that we hope will make this easier.
+
+=== Focus on the domain model ===
+
+[[Image:Nodespace-bjorns-life-320x240.png|thumb|right| The same domain modeled in Neo4j]]
+The first thing to keep in mind as you start a Neo4j project is to focus on the domain model. Step up to the white board, forget UML and E/R diagrams and just draw a conceptual model of your project's domain. For example, to the right is a conceptual model of one day in the life of our good friend Björn's. You can see from the white board that he owns a car, which he uses to drive his kids and groceries to the daycare. (No, we don't know why he supplies the daycare with groceries.)
+
+When you have a first draft of your domain model, you'll notice how easy it is to represent it in the graph. Take a look at the graph to the right. It is in fact quite similar to the scribbles on the white board. Over the past five years, we've built a lot of applications on top of Neo4j and we've noticed that it's usually trivial to go from a domain model to a representation in the graph: all entities and their relationships from your white board are explicit in the graph (as either nodes, relationships or properties). We call this ''white board friendly''.
+
+So focus on the domain model. Go directly to a graph representation. And then build an object-oriented domain layer on top of the graph.
+
+=== Assume the graph is always in memory (Neo4j will make it so) ===
+
+With legacy architectures, there's usually a serialization stage between your domain model and its persistent state in the storage backend. In raw JDBC applications, you serialize your OO classes to strings that you send over the wire. In EJB applications, you use DTOs as data capsules to/from the entity layer. In other frameworks, there's commonly a load/store pattern where you first load an entity from the store, perform some operations on it and then store it back.
+
+With Neo4j, forget all about that. You have a domain layer on top of the graph (see below for some pointers on that). Each domain entity typically wraps a node (or a relationship) and when you're implementing that class your mindset should be that you're working with an in-memory data structure. There's no need to load/store anything, and no need to inject data from the graph into DTOs. There's no state in your domain layer. Each entity simply wraps a node, to which it forwards all data handling requests (typically getters and setters). Your domain layer is an adaptation of the generic graph to a type safe, object-oriented abstraction expressed in the vocabulary of your domain.
+
+=== Assume everything's automatically persistent (Neo4j will make it so) ===
+
+This is a corollary to the previous guideline. When you implement your domain model, your focus should be on reading and writing data to the graph in a transactional context. The transactions are logically demarcated to follow business operations and state is shared through the graph. As a side effect, everything is persistent with proper [[Transactions#The_basics|ACID semantics]]. You don't ever have to worry about explicitly instructing Neo4j to store anything.
+
+==Implementing the domain model ==
+
+=== Implement your domain model using the delegator pattern ===
+
+=== Focus on logical transactions rather than artificial load/stores ===
+
+== Structuring your graph ==
+
+=== Keep your graph connected ===
+=== Use reference and subreference nodes to organize entry points ===
+=== Prefer relationships to properties when your whiteboard tells you to ===
+=== Use relationship types appropriately ===
+=== Use an indexing service to find nodes by property values ===</text>
+    </revision>
+  </page>
+  <page>
+    <title>Guidelines for Building a Neo App</title>
+    <id>200</id>
+    <redirect />
+    <revision>
+      <id>2110</id>
+      <timestamp>2010-01-21T13:45:44Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Guidelines for Building a Neo App]] moved to [[Guidelines for Building a Neo4j Application]]</comment>
+      <text xml:space="preserve" bytes="57">#REDIRECT [[Guidelines for Building a Neo4j Application]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>High Availability Cluster</title>
+    <id>285</id>
+    <revision>
+      <id>4245</id>
+      <timestamp>2011-08-14T10:25:45Z</timestamp>
+      <contributor>
+        <username>Tbaum</username>
+        <id>1056</id>
+      </contributor>
+      <comment>/* Set up a Coordinator cluster */</comment>
+      <text xml:space="preserve" bytes="15071">= Introduction =
+
+The Neo4j High Availability (HA) project is part of Neo4j Enterprise and has the following two goals:
+
+# Provide a fault-tolerant database architecture, where several Neo4j slave databases can be configured to be exact replicas of a single Neo4j master database. This allows the end-user system to be fully functional and both read and write to the database in the event of hardware failure.
+# Provide a horizontally scaling read-mostly architecture that enables the system to handle much more read load than a single Neo4j database.
+
+Neo4j HA uses a single master and multiple slaves. Both the master and the slaves can accept write requests. A slave handles a write by synchronizing with the master to preserve consistency. Updates to slaves are asynchronous so a write from one slave is not immediately visible on all other slaves. This is the only difference between HA and single node operation (all other ACID characteristics are the same).
+
+= Setting up a local development and testing environment =
+
+== Set up a Coordinator cluster ==
+
+The members of the HA cluster use a Coordinator cluster to manage themselves and coordinate lifecycle activity like electing a master. When running an embedded HA cluster, a Zookeeper cluster can be used for coordination. That must be installed and configured before working with the HA instances.
+
+Go to [http://www.apache.org/dyn/closer.cgi/zookeeper/ http://www.apache.org/dyn/closer.cgi/zookeeper/], select a mirror and grab the 3.3.2 release.
+
+Unpack somewhere and create three config files called &lt;code&gt;server1.cfg&lt;/code&gt;, &lt;code&gt;server2.cfg&lt;/code&gt; and &lt;code&gt;server3.cfg&lt;/code&gt; in the &lt;code&gt;conf&lt;/code&gt; directory:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+#server1.cfg
+tickTime=2000
+initLimit=10
+syncLimit=5
+
+dataDir=data/zookeeper1
+clientPort=2181
+
+server.1=localhost:2888:3888
+server.2=localhost:2889:3889
+server.3=localhost:2890:3890
+&lt;/pre&gt;
+
+The other two config files will have a different dataDir and clientPort set but the other parameters identical to the first one:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+#server2.cfg
+#...
+dataDir=data/zookeeper2
+clientPort=2182
+#...
+
+#server3.cfg
+dataDir=data/zookeeper3
+clientPort=2183
+&lt;/pre&gt;
+
+Create the data dirs:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+zookeeper-3.3.2$ mkdir -p data/zookeeper1 data/zookeeper2 data/zookeeper3
+&lt;/pre&gt;
+
+Next we need to create a file in each data directory called &quot;myid&quot; that contains an id for each server equal to the number in &quot;server.1&quot; &quot;server.2&quot; and &quot;server.3&quot; from the configuration files.
+&lt;pre class=&quot;brush: plain&quot;&gt;
+zookeeper-3.3.2$ echo '1' &gt; data/zookeeper1/myid
+zookeeper-3.3.2$ echo '2' &gt; data/zookeeper2/myid
+zookeeper-3.3.2$ echo '3' &gt; data/zookeeper3/myid
+&lt;/pre&gt;
+
+We are now ready to start the ZooKeeper instances:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+zookeeper-3.3.2$ java -cp lib/log4j-1.2.15.jar:zookeeper-3.3.2.jar org.apache.zookeeper.server.quorum.QuorumPeerMain conf/server1.cfg &amp;
+zookeeper-3.3.2$ java -cp lib/log4j-1.2.15.jar:zookeeper-3.3.2.jar org.apache.zookeeper.server.quorum.QuorumPeerMain conf/server2.cfg &amp;
+zookeeper-3.3.2$ java -cp lib/log4j-1.2.15.jar:zookeeper-3.3.2.jar org.apache.zookeeper.server.quorum.QuorumPeerMain conf/server3.cfg &amp;
+&lt;/pre&gt;
+
+For more information on ZooKeeper see [http://hadoop.apache.org/zookeeper/docs/r3.3.2/ hadoop.apache.org/zookeeper/docs/r3.3.2/]
+
+== Downloading ==
+
+If you are using maven, simply add the following dependency to your project:
+&lt;pre class=&quot;brush: xml&quot;&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.neo4j&lt;/groupId&gt;
+         &lt;artifactId&gt;neo4j-ha&lt;/artifactId&gt;
+         &lt;version&gt;1.3&lt;/version&gt;
+      &lt;/dependency&gt;
+&lt;/pre&gt;
+
+If you prefer to download the jar files manually, they are included in the [http://neo4j.org/download/ Neo4j distribution].
+
+== Start a highly available graph database service ==
+
+The difference in code when using Neo4j-HA is the creation of the graph database service.
+&lt;pre class=&quot;brush: java&quot;&gt;
+GraphDatabaseService db = new HighlyAvailableGraphDatabase( path, config );
+&lt;/pre&gt;
+
+The configuration can contain the standard configuration parameters but will also have to contain:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+#unique machine id for this graph database
+#can not be negative id and must be unique
+ha.machine_id = 1
+
+#ip and port for this instance to bind to
+ha.server = localhost:6001
+
+#connection information to zookeeper
+ha.zoo_keeper_servers = localhost:2181,localhost:2182,localhost:2183
+&lt;/pre&gt;
+
+Start a project that depends on the neo4j-ha-0.5-1.2.jar library. You may have to manually add zookeeper-dev.jar and zookeeper-3.3.2.jar in a directory called &lt;code&gt;lib&lt;/code&gt; (the jars can be found where you unpacked zookeeper). Here is a full dependency list required to run neo4j-ha:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+ org.neo4j:neo4j-ha:jar:0.5-1.2
+ +- org.neo4j:neo4j-kernel:jar:1.2-1.2
+ |  \- org.apache.geronimo.specs:geronimo-jta_1.1_spec:jar:1.1.1
+ +- org.neo4j:neo4j-management:jar:1.2-1.2
+ +- org.neo4j:neo4j-shell:jar:1.2-1.2
+ |  \- org.apache.servicemix.bundles:org.apache.servicemix.bundles.jline:jar:0.9.94_1
+ +- org.neo4j:neo4j-lucene-index:jar:0.2-1.2
+ |  \- org.apache.servicemix.bundles:org.apache.servicemix.bundles.lucene:jar:3.0.1_2
+ +- org.apache.zookeeper:zookeeper:jar:3.3.2
+ +- org.jboss.netty:netty:jar:3.2.1.Final
+ +- log4j:log4j:jar:1.2.16
+&lt;/pre&gt;
+
+First we need to create a database that can be used for replication. This is easiest done by just starting a normal embedded graph database, pointing out a path and shutdown.
+&lt;pre class=&quot;brush: java&quot;&gt;
+new EmbeddedGraphDatabase( &quot;empty-db&quot; ).shutdown();
+&lt;/pre&gt;
+
+The next step would be to create a configuration file and a Main class to start a highly available graph database.
+&lt;pre class=&quot;brush: plain&quot;&gt;
+#ha-server1.conf
+ha.machine_id = 1
+ha.server = localhost:6001
+ha.zoo_keeper_servers = localhost:2181,localhost:2182,localhost:2183
+
+enable_remote_shell = port=1331
+&lt;/pre&gt;
+
+The Main class:
+&lt;pre class=&quot;brush: java&quot;&gt;
+import java.util.Map;
+
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.kernel.HighlyAvailableGraphDatabase;
+
+public class StartLocalHaDb
+{
+    public static void main( String[] args )
+    {
+        String path = args[0];
+        String configFile = args[1];
+        Map&lt;String,String&gt; config = HighlyAvailableGraphDatabase.loadConfigurations( configFile );
+        GraphDatabaseService db = new HighlyAvailableGraphDatabase( path, config );
+    }
+}
+&lt;/pre&gt;
+
+We created a config file with machine id=1 and enabled remote shell. The main method will expect the path to the db as first parameter and the configuration file as the second parameter. Copy the empty db to a path and try to execute:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+$ cp -R empty-db hadb1
+$ java -cp &lt;all jars and StartLocalHaDb class&gt; StartLocalHaDb hadb1 ha-server1.conf
+&lt;/pre&gt;
+
+It should now be possible to connect to the instance using the Neo4j Shell:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+$./bin/neo4j-shell -port 1331
+NOTE: Remote Neo4j graph database service 'shell' at port 1331
+Welcome to the Neo4j Shell! Enter 'help' for a list of commands
+
+neo4j-sh (0)$ hainfo
+I'm currently master
+Connected slaves:
+neo4j-sh (0)$ mkrel -ct TEST
+neo4j-sh (0)$ ls
+(me) --&lt;TEST&gt;-&gt; (1)
+neo4j-sh (0)$ cd 1
+neo4j-sh (1)$ set name test1
+neo4j-sh (1,test1)$ ls
+*name =[test1]
+(me) &lt;-&lt;TEST&gt;-- (0)
+&lt;/pre&gt;
+
+Since it is the first instance to join the cluster it is elected master. Starting another instance would require a second configuration and another path to the db.
+
+&lt;pre class=&quot;brush: plain&quot;&gt;
+#ha-server2.conf
+ha.machine_id = 2
+ha.server = localhost:6002
+ha.zoo_keeper_servers = localhost:2181,localhost:2182,localhost:2183
+
+enable_remote_shell = port=1332
+&lt;/pre&gt;
+
+We need to change &lt;code&gt;machine id&lt;/code&gt;, shell port and listen port of the ha server, then copy the db to a new path and startup:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+$ cp -R empty-db hadb2
+$ java -cp &lt;all jars and StartLocalHaDb class&gt; StartLocalHaDb hadb2 ha-server2.conf
+&lt;/pre&gt;
+
+Now start the shell connecting to port 1332:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+$./start-neo4j-shell-port 1332
+NOTE: Remote Neo4j graph database service 'shell' at port 1332
+Welcome to the Neo4j Shell! Enter 'help' for a list of commands
+
+neo4j-sh (0)$ hainfo
+I'm currently slave
+neo4j-sh (0)$ mkrel -ct TEST
+neo4j-sh (0)$ ls
+(me) --&lt;TEST&gt;-&gt; (1,test1)
+(me) --&lt;TEST&gt;-&gt; (2)
+neo4j-sh (0)$ cd 2
+neo4j-sh (2)$ set name test2
+neo4j-sh (2,test2)$ cd ..
+neo4j-sh (0)$ ls
+(me) --&lt;TEST&gt;-&gt; (1,test1)
+(me) --&lt;TEST&gt;-&gt; (2,test2)
+neo4j-sh (0)$  
+&lt;/pre&gt;
+
+= Setup a production environment or multi machine testing environment =
+
+== Porting your application to run on Neo4j-HA ==
+
+As mentioned earlier the only thing that needs to change is the creation of the graph database service. In single machine operations the EmbeddedGraphDatabase class should be used while in multi machine HA environment the HighlyAvailableGraphDatabase class should be used. Depending on application type this either means modifying the code or the configuration of the container running the application.
+
+== Multi machine cluster setup ==
+
+We have already covered how to setup a ZooKeeper service locally. Setting up a multi machine environment together with Neo4j-HA can be done in different ways depending on requirements. First, reading the [http://hadoop.apache.org/zookeeper/docs/r3.2.1/zookeeperAdmin.html ZooKeeper administration guide] on how to deploy and maintain a ZooKeeper cluster is recommended. 
+
+Depending on the requirements such as load, fault tolerance and available hardware Neo4j-HA can be configured in different ways. Here we will outline different setups and describe their characteristics.
+
+=== Small ===
+
+Requirements:
+* 3 physical (or virtual) machines
+* 1 ZooKeeper instance running on each machine
+* 1 Neo4j-HA instance running on each machine
+
+This setup is conservative in use of hardware while being able to handle moderate read load. It can only operate when at least 2 of the ZooKeeper instances are running. Since the ZooKeeper service and Neo4j-HA are running together on each machine this will in most scenarios mean that only one server is allowed to go down (theoretically it can handle 1 ZooKeeper instance crash and 2 Neo4j-HA instances going down).
+
+=== Medium ===
+
+Requirements:
+* 5-7+ machines
+* ZooKeeper running on 3, 5 or 7 machines
+* Neo4j-HA can run on 5+ machines
+
+The drawback with this setup is that on some machines both a Neo4j-HA instance and ZooKeeper instance are running while on some machines only a Neo4j-HA instance is running. This means that two different machine setups have to be managed.
+
+Fault tolerance will depend on how many machines are running ZooKeeper. With 3 ZooKeeper instances the cluster can survive one ZooKeeper going down, with 5 it can survive 2 and with 7 it can handle 3 ZooKeeper instances failing. The number of Neo4j-HA instances that can fail is theoretically all but 1.
+
+=== Large ===
+
+Requirements:
+* 8+ machines
+* ZooKeeper running on dedicated machines.
+
+In this setup all ZooKeeper instances are running on separate machines as a dedicated ZooKeeper service. The dedicated ZooKeeper cluster of 5 machines can handle 2 machines failing, 7 machines 3 and so on. The Neo4j-HA cluster will be able to operate from X machines down to a single machine. Adding more Neo4j-HA instances will be very easy in this setup since one does not have to be concerned with ZooKeeper (hosted as a dedicated service elsewhere) thus, the only thing that needs to be configured for each new Neo4j-HA is machine id and host.
+
+= Configuration, administration and operations =
+
+Except for standard Neo4j [[Configuration_Settings|kernel configuration]] and the &lt;code&gt;ha.machine_id&lt;/code&gt;, &lt;code&gt;ha.server&lt;/code&gt;, and &lt;code&gt;ha.zoo_keeper_servers&lt;/code&gt; settings, there is at the moment one additional configuration parameter for Neo4j-HA called &lt;code&gt;ha.pull_interval&lt;/code&gt;. This parameter tells how often (in seconds) a slave should check for updates on the master when the slave is in idle mode (or just serving read requests). 
+
+When adding more instances to an existing Neo4j-HA cluster it is very important to make sure the &lt;code&gt;ha.machine_id&lt;/code&gt; setting gets assigned a unique id. Start by creating the configuration file with unique machine id and other required configuration parameters. Take a fairly up to date copy of the database running in the Neo4j-HA cluster and deploy it together with your new configuration and application. Finally start the application.
+
+To take an instance down for maintenance:
+# Invoke the shutdown method on the highly available graph database (or if the application is running in a container, invoke the shutdown procedure for the application/container).
+# Perform the required maintenance.
+# Start the application.
+
+Monitoring the running cluster can be performed using JMX tools (see [[Monitoring and Deployment]]), for more detailed information on each instance see the &lt;code&gt;messages.log&lt;/code&gt; file found in the db store directory. 
+
+== Problems / troubleshooting ==
+
+If an instance crashes or will not startup the first thing to do is to review the logs. Review messages/stacktraces printed to System.out and the db-store-dir/messages.log.
+
+&quot;org.neo4j.kernel.ha.zookeeper.ZooKeeperTimedOutException: Connection to ZooKeeper server timed out, keeper state=Disconnected&quot; means that the Neo4j-HA instance was unable to connect to the ZooKeeper service. Make sure the ZooKeeper service is running and that the &quot;ha.zoo_keeper_servers&quot; configuration parameter has the right connection information. To test if the ZooKeeper service is running you can try to connect to it using the client tool supplied by ZooKeeper.
+
+&quot;Exception in thread &quot;main&quot; java.lang.RuntimeException: java.io.FileNotFoundException: &lt;db-store-dir&gt; (No such file or directory)
+	at org.neo4j.kernel.ha.zookeeper.NeoStoreUtil.&lt;init&gt;(NeoStoreUtil.java:38)&quot;. The database store directory pointed out does not exist. Make sure a copy of the database exists locally on the instance in the specified folder.
+
+In the &lt;code&gt;messages.log&lt;/code&gt; file there will sometimes be a log message &quot;newMaster(null) called &lt;exception&gt;: &lt;message&gt; &quot; followed by a stack trace. This message usually means that the current master is unavailable. A new master will be automatically elected.
+
+&quot;Broken store, my last committed tx,machineId[txid,machineid] but master says machine id for that txId is other-machineid&quot; means that the machine trying to connect to the running Neo4j-HA cluster actually has a different version of the database compared to the current master. This can happen when for example writing one transaction directly to the master and the master crashes right after it has committed (but before it has replicated the transaction to any slave). A new master is elected and the next transaction is executed. Once the original master tries to connect to the cluster it will be rejected since its view of the store is not consistent with the current's master. Always writing to a slave will minimize the risk of this happening since if the master crashes then one slave will have the latest committed transaction allowing for the old master to rejoin the cluster after a potential crash.</text>
+    </revision>
+  </page>
+  <page>
+    <title>Indexing</title>
+    <id>179</id>
+    <redirect />
+    <revision>
+      <id>1566</id>
+      <timestamp>2009-12-10T10:24:37Z</timestamp>
+      <contributor>
+        <username>Mattias</username>
+        <id>6</id>
+      </contributor>
+      <comment>[[Indexing]] moved to [[Indexing with IndexService]]: I wanted to get the work IndexService into the title so that it's a better match in searches</comment>
+      <text xml:space="preserve" bytes="40">#REDIRECT [[Indexing with IndexService]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Main Page</title>
+    <id>1</id>
+    <revision>
+      <id>4303</id>
+      <timestamp>2011-09-29T19:15:39Z</timestamp>
+      <contributor>
+        <username>Peterneubauer</username>
+        <id>418</id>
+      </contributor>
+      <comment>/* Tools, Packages */</comment>
+      <text xml:space="preserve" bytes="5198">=== Welcome to Neo4jWiki ===
+
+This is the wiki of the [http://neo4j.org Neo4j] project. It aims to be a comprehensive resource for Neo4j-based software development. We're not quite there yet, but it's a wiki so feel free to jump in and contribute.
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+=== Download ===
+* [http://neo4j.org/download The Neo4j download area] - download of the released Neo4j artifacts
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+=== Documentation ===
+The Neo4j documentation now mainly lives here:
+* [http://docs.neo4j.org/chunked/snapshot/ The Neo4j Manual] - read the current documentation
+* [http://docs.neo4j.org/ docs.neo4j.org] - other versions and formats of the manual (pdf, text)
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+=== Recommended reading ===
+* '''[[Getting Started]]''' - 10 minute guide to get started using Neo4j Server, Ruby, Java, Python
+* [http://docs.neo4j.org/chunked/milestone/server.html Getting Started with the standalone Neo4j server]
+* [http://docs.neo4j.org/chunked/milestone/server-java-rest-client-example.html Using the Neo4j Server with Java]
+* [[Using the Neo4j Server with Ruby]]
+* [[IMDB Example]] - a full web application using Neo4j and IMDB actor/movie data
+* [[Ruby]] - lots of development happens here; there's Rails support and it offers a nice syntax for using Neo4j
+* [[Neo4j In The Wild]] - find out what others are doing with Neo4j
+* [[High Availability Cluster | Getting Started with Neo4j High Availability]] - learn how to setup Neo4j HA
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== [[Getting Started]] ===
+* [http://docs.neo4j.org/chunked/snapshot/tutorials-java-embedded.html Getting Started With Neo4j] (Java)
+* [http://docs.neo4j.org/chunked/milestone/server.html Getting Started With Neo4j Server] (REST: Java, cURL, etc.)
+* [http://docs.neo4j.org/chunked/snapshot/shell.html Shell] Guide
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== Building An Application ===
+* [[Design Guide]]
+* [[Guidelines for Building a Neo4j Application]] ''(in-progress)''
+* [[IMDB Example]] - a full application using Neo4j
+* [[Domain Modeling Gallery]]
+* [http://dist.neo4j.org/basic-neo4j-code-examples-2008-05-08.pdf Basic code snippets] (~200k / 16 slide PDF introducing the basic concepts through code) ''(needs update)''
+* [[Workshop]] ''(needs update)''
+* [http://api.neo4j.org/current/ The latest API] documentation
+* [[Visualization options for graphs]]
+* [[Monitoring and Deployment]]
+* [[Event framework]]
+* [[Testing with Neo4j]]
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== Indexing ===
+* [[Index Framework|Integrated index framework]]
+
+
+The previous index API
+* [[Indexing with IndexService]]
+* [[Indexing with BatchInserter]]
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== RDF / SPARQL / MetaModel ===
+* [[RDF / SPARQL Quickstart Guide]] ''initial post''
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== FAQ ===
+* [[FAQ]]
+* [[Gotchas]]
+* [[Neo Mistakes|Common mistakes]] ''(needs update)''
+* [[Roadmap| The rough roadmap for Neo4j]]
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== Performance/Scalability ===
+* [http://docs.neo4j.org/chunked/snapshot/configuration.html Configuration Settings]
+* [[Neo4j Performance Guide]]
+* [[Batch Insert]] for fast import / bulk load
+* [[Neo4j in the Cloud]]
+* [[FAQ]]
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== Tools, Packages ===
+Tools:
+* [[Shell]]
+* [[Online Backup]]
+* [[Batch Insert]]
+* [[Neoclipse]]
+* [[SQL Importer]]
+Packages:
+* [[Graph-algo]]
+* [[Getting Started With Neo4j]]
+* More packages on the [http://components.neo4j.org/ Neo4j Components site].
+* [[Spatial algos and GIS]] and the [[Neo4j Spatial]] project
+* [[OWL, SPARQL, SAIL, and RDF]]
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== Language and framework bindings ===
+'''Languages'''
+* [[Clojure]]
+* Erlang bindings to Neo4j: [http://github.com/nerlo/nerlo nerlo] by Ingo Schramm, see [http://wiki.github.com/nerlo/nerlo/howto-use-neo4j-from-erlang howto], and [http://github.com/dmitriid/cali cali] by [http://twitter.com/dmitriid Dmitrii Dimandt]
+* [[Gremlin]] Graph programming language
+* [[Groovy]]
+* [[Java]] object mapping
+* [[PHP]]
+* [[Python]]
+* [[Ruby]] (including RESTful API)
+* [[Scala]] (including RESTful API)
+
+'''Frameworks'''
+* [[Grails]]
+* [[Griffon]]
+* [[Qi4j]] Domain Driven Development in Java, with great persistence architecture
+* [[Roo_Project|Roo]]
+
+'''[[Getting Started REST|Neo4j REST]] clients'''
+* [http://bitbucket.org/2hdddg/neo4restnet/ Neo4RestNet] .Net REST client
+* [http://neo4jrestsharp.codeplex.com/ Neo4jRestSharp] .Net REST client
+* [http://www.cliki.net/cl-neo4j Common Lisp REST client] [http://common-lisp.net/project/cl-neo4j/ project page]
+* [http://github.com/onewheelgood/Neo4J-REST-PHP-API-client PHP REST client] [http://onewheeledbicycle.com/2010/06/01/getting-started-with-neo4j-rest-api-and-php/ getting started]
+* [http://github.com/versae/neo4j-rest-client Python REST client]
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;intro&quot;&gt;
+
+=== Other ===
+* [[Articles]]
+* [[External Articles]], academia
+* [[Presentations]]
+* [[Neo4j In The Wild]]
+* [[Neo4j Heroku Addon]]
+Contributing to Neo4j:
+* [[Code Contributor's Guide]]
+* [[Release Guide]]
+* [[Project Ideas]]
+* [[User Meetings]]
+&lt;/blockquote&gt;</text>
+    </revision>
+  </page>
+  <page>
+    <title>MetaModel</title>
+    <id>341</id>
+    <redirect />
+    <revision>
+      <id>3605</id>
+      <timestamp>2011-01-11T02:21:22Z</timestamp>
+      <contributor>
+        <username>Aduric</username>
+        <id>578</id>
+      </contributor>
+      <comment>[[MetaModel]] moved to [[RDF / SPARQL Quickstart Guide]]: Article not describing MetaModel specs but a tutorial on getting SPARQL working</comment>
+      <text xml:space="preserve" bytes="43">#REDIRECT [[RDF / SPARQL Quickstart Guide]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Monitoring and Deployment</title>
+    <id>256</id>
+    <revision>
+      <id>4305</id>
+      <timestamp>2011-10-07T10:30:57Z</timestamp>
+      <contributor>
+        <username>Peterneubauer</username>
+        <id>418</id>
+      </contributor>
+      <comment>Replaced content with &quot;&lt;blockquote&gt;This page has moved to [http://docs.neo4j.org/chunked/snapshot/operations-jmx.html The Neo4j Manual].
+&lt;/blockquote&gt;&quot;</comment>
+      <text xml:space="preserve" bytes="127">&lt;blockquote&gt;This page has moved to [http://docs.neo4j.org/chunked/snapshot/operations-jmx.html The Neo4j Manual].
+&lt;/blockquote&gt;</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo4j Configuration Settings</title>
+    <id>187</id>
+    <redirect />
+    <revision>
+      <id>1733</id>
+      <timestamp>2009-12-16T10:56:48Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Neo4j Configuration Settings]] moved to [[Configuration Settings]]</comment>
+      <text xml:space="preserve" bytes="36">#REDIRECT [[Configuration Settings]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo4j Performance Guide</title>
+    <id>265</id>
+    <redirect />
+    <revision>
+      <id>2908</id>
+      <timestamp>2010-05-28T14:40:08Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Neo4j Performance Guide]] moved to [[Performance Guide]]</comment>
+      <text xml:space="preserve" bytes="31">#REDIRECT [[Performance Guide]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo4j Performance Linux</title>
+    <id>264</id>
+    <redirect />
+    <revision>
+      <id>2906</id>
+      <timestamp>2010-05-28T14:39:05Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Neo4j Performance Linux]] moved to [[Linux Performance Guide]]</comment>
+      <text xml:space="preserve" bytes="37">#REDIRECT [[Linux Performance Guide]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo4j Spatial</title>
+    <id>203</id>
+    <revision>
+      <id>4280</id>
+      <timestamp>2011-09-14T20:40:44Z</timestamp>
+      <contributor>
+        <username>Stevedoesstuff</username>
+        <id>1079</id>
+      </contributor>
+      <minor/>
+      <comment>Fixed github repository link - Was the old repo removed?</comment>
+      <text xml:space="preserve" bytes="7032">The Neo4j database core has no built in support for spatial data. However, it is in principle not difficult to model spatial data in a graph database. Several users of Neo4j have already done so in various domain specific ways. This project provides the tools and utilities to make it much easier for developers to spatially enable their graph models. If you have data with locations or spatial features, you should be able to use these libraries to considerably enhance the usability of your data in GIS environments. This includes support for spatial indexes, import and export from common spatial formats, publishing of the data to well know GIS systems like GeoTools, GeoServer and uDig, and advanced spatial queries based on bounding boxes, distance, topology, spatial analysis and graph matching.
+
+== First Release in September 2010 ==
+
+The first announced release of Neo4j Spatial was made at the FOSS4G Conference in Barcelona in early September 2010. This version was capable of importing a number of different data formats, including Shapefile and Open Streetmap OSM files. It also included the API's for users to spatially enable any existing data model, without having to remodel the data. See the announcement: [http://blogs.neotechnology.com/news/2010/09/neo-technology-announces-neo4j-spatial.html Neo Technology announces Neo4j Spatial].
+
+The rest of this page still contains the old wiki discussions on the initial planning for the project. We will soon update these to reflect the current status of the project. In the meantime we have a few new pages to help you get started using what is already there:
+* [[Neo4j Spatial in uDig]]
+* [[Neo4j Spatial in GeoServer]]
+
+Also take a look directly at the source code at:
+* [https://github.com/neo4j/spatial Neo4j Spatial] on github
+* [http://gitorious.org/udig-community/neo4j Neo4j Plugin for uDig] on gitorious
+
+== Original Planning Discussions ==
+
+In this project we will discuss the various elements of spatial support, the types of solutions and approaches that have been discussed, and the proposed schedule of activities to achieve such a goal. We are also open to [[Collaboration on Spatial Projects]], and are offering to mentor [[Google Summer of Code for Neo4j Spatial]] projects.
+
+== Elements of a spatial database ==
+
+The most basic requirements of a spatial database would be:
+{|
+|-
+! [[Spatial Data Storage|Storage]]
+| Provide the ability to store spatial objects in a way that facilitates the other spatial requirements
+|-
+! [[Searching and Indexing Spatial Data|Search]]
+| Facilitate indexing of spatial data for optimal search performance (both time and memory) as well as performance of spatial operations
+|-
+! [[Performing Spatial Operations|Operations]]
+| Provide a set of common spatial operations in the Neo4j API to aid application developers in making use of Neo4j as a spatial database
+|-
+! [[Importing and Exporting Spatial Data|I/O]]
+| Provide support for importing and exporting spatial data using a number of popular spatial standards
+|}
+
+We will start simple, taking inspiration from some specific use cases, and elements of the published standards, like [http://www.opengeospatial.org/ OpenGIS], as well as other open source GIS projects, like those tracked by [http://www.osgeo.org/ OSGeo]. Since Neo4j is a Java library, the [http://www.geotools.org/ GeoTools] project is of high relevance. As is the open source spatial database [http://www.postgis.org/ PostGIS].
+
+== Suggested approaches ==
+
+There are many things to consider here, but one of the most critical would be the question of how to store the spatial objects. There are two main groups of data:
+* [[Spatial Feature Data|Geographic Features]]
+* [[Spatial Raster Data|Geographic Raster data]]
+
+For the early work in this project we will focus on feature data, primarily because the perceived benefits of using a graph database for such data are a little more apparent.
+
+The current suggestions for storing feature data are:
+* '''In-Node'''
+** Storing all data associated with a single feature object within a single node. This can be done even within a single property, using either or both of the '''well known text''' and '''well known binary''' formats ('''WKT/WKB'''), or as a set of properties describing the various elements of the geometry.
+** The Oracle and PostGIS spatial databases use approaches like this, because this works as well in tabular databases. There is a lot of public information available about both of these solutions and in PostGIS case, a lot of open source code is available for review.
+** The indexing and spatial operations that are performed on this might are less transparent to the application developers and users, which has pros and cons.
+* '''Sub-graphs'''
+** Storing the features as a sub-graph with a structure that matches the feature data structure itself.
+** This approach makes much better use of the graph database itself, makes the feature storage transparent to the developers and users, and leads to 'graph-based' solutions to the spatial operations. It would also facilitate application developers extending the spatial support themselves.
+** The storage and complexity of the database is much higher than in the other approach (many more primitives are involved in this approach), probably affecting scalability and performance.
+
+The difference between the two approaches are likely to lead to very different performance characteristics of the database, and so it is suggested that both be prototyped and benchmarked in various scenarios. It might turn out that both have their place, and if possible both might be supported in the final solution, possibly behind a unified API. It is possible that the Neo4j community will come up with ways of working with spatial data that go well beyond the common scenarios from relational databases, and beyond the expectations of the original developers of the spatial support. We would not like to take decisions that might impede that kind of innovation.
+
+== Proposed schedule ==
+
+At the highest level, the project will take three phases:
+# '''Setup''' - Planning, discussions with the community, discussions with identified early adopters and potential customers.
+# '''Prototype''' - Develop and benchmark a decent minimal viable subset of the required features, sufficient to be released to the community, be of use to many, and enable feedback on the approaches taken.
+# '''Release''' - Based on the response to the first public release, the ''minimum viable product'', plan, develop and release a more complete system, covering all the most requested features. Ideally this might conform to published standards like [http://www.opengeospatial.org/ OpenGIS], but possibly it might require a new standard focusing on graph databases.
+
+Further details are available on the [[Neo4j Spatial Project Plan]].
+
+== [[Neo4j Spatial Blog Ideas]] ==
+
+Some ideas for possible blogs on how to use Neo4j Spatial are being discussed on the page [[Neo4j Spatial Blog Ideas]].
+
+[[Category:Spatial]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo - Newton integration</title>
+    <id>157</id>
+    <redirect />
+    <revision>
+      <id>1345</id>
+      <timestamp>2009-06-17T13:53:35Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Neo - Newton integration]] moved to [[Newton Integration]]</comment>
+      <text xml:space="preserve" bytes="32">#REDIRECT [[Newton Integration]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo - Qi4j integration</title>
+    <id>78</id>
+    <revision>
+      <id>1171</id>
+      <timestamp>2009-02-11T14:20:00Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <text xml:space="preserve" bytes="2865">== Goal ==
+The goal of this integration is to expose Neo4j as an EntityStore in [http://www.qi4j.org/ Qi4j].
+
+== Configuring your project ==
+
+Since both Neo4j and Qi4j are available using maven, setting up your project to use Neo4j and Qi4j is as simple as setting up your pom.
+
+The Neo4j integration component is distributed through the Qi4j maven repository, so there are only two things you need to add to your pom. The first is the repository reference and the second is the dependency declaration.
+
+The URI for the Qi4j maven repository is: &lt;code&gt;http://repository.ops4j.org/maven2&lt;/code&gt;, so the configuration you need to add is:
+&lt;pre class=&quot;brush: xml&quot;&gt;
+  &amp;lt;repositories&amp;gt;
+    &amp;lt;repository&amp;gt;
+      &amp;lt;id&amp;gt;ops4j-repository&amp;lt;/id&amp;gt;
+      &amp;lt;url&amp;gt;http://repository.ops4j.org/maven2&amp;lt;/url&amp;gt;
+    &amp;lt;/repository&amp;gt;
+    &amp;lt;!-- ... any other repositories ... --&amp;gt;
+  &amp;lt;/repositories&amp;gt;
+&lt;/pre&gt;
+
+The artifact id of the Neo4j integration component is: &lt;code&gt;qi4j-ext-entitystore-neo4j&lt;/code&gt;, making the dependency statement:
+&lt;pre class=&quot;brush: xml&quot;&gt;
+  &amp;lt;dependencies&amp;gt;
+    &amp;lt;dependency&amp;gt;
+      &amp;lt;groupId&amp;gt;org.qi4j.extensions&amp;lt;/groupId&amp;gt;
+      &amp;lt;artifactId&amp;gt;qi4j-ext-entitystore-neo4j&amp;lt;/artifactId&amp;gt;
+      &amp;lt;version&amp;gt;0.3-SNAPSHOT&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    &amp;lt;!-- ... more dependencies ... --&amp;gt;
+  &amp;lt;/dependencies&amp;gt;
+&lt;/pre&gt;
+
+Finally you will have to add the Neo4j EntityStore to your application configuration in Qi4j. A simple Application could be configured like this:
+&lt;pre class=&quot;brush: java&quot;&gt;
+public class MyApplication {
+    private static string appTitle = &quot;A cool app that uses the Neo4j EntityStore&quot;;
+    public static void main( String[] args )
+    {
+        Qi4j is = new Energy4Java();
+        ApplicationAssemblyFactory assemblyFactory = new ApplicationAssemblyFactory();
+        ApplicationFactory factory = new ApplicationFactory( is, assemblyFactory );
+        Assembler assembler = new SingletonAssembler()
+        {
+            public void assemble( ModuleAssembly module ) throws AssemblyException
+            {
+                // Configure the Neo4j EntityStore with automatic transaction management and in-memory information duplication.
+                org.qi4j.entity.neo4j.Configuration.INDIRECT.assemble( module );
+                // Add an Entity ID generator that enables a fast Neo lookup.
+                org.qi4j.entity.neo4j.Configuration.IDENTITY_GENERATOR.assemble( module );
+
+                // !! configure your composites here ...
+            }
+        };
+        ApplicationContext context = factory.newApplication( assembler );
+        ApplicationInstance application = context.newInstance( appTitle );
+
+        // !! initialize the Structure of your application here ...
+
+        // activate the application
+        application.activate()
+    }
+}
+&lt;/pre&gt;</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo - SQL importer</title>
+    <id>156</id>
+    <redirect />
+    <revision>
+      <id>1343</id>
+      <timestamp>2009-06-17T13:51:55Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Neo - SQL importer]] moved to [[SQL Importer]]</comment>
+      <text xml:space="preserve" bytes="26">#REDIRECT [[SQL Importer]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo Documentation Overview</title>
+    <id>34</id>
+    <revision>
+      <id>2282</id>
+      <timestamp>2010-02-19T14:02:41Z</timestamp>
+      <contributor>
+        <username>Mattias</username>
+        <id>6</id>
+      </contributor>
+      <minor/>
+      <text xml:space="preserve" bytes="2344">=== Documentation resources ===
+
+'''Phase I''': Complete documentation for a JW-level hacker.
+
+'''Phase II''': Complete documentation for a corporate programmer.
+
+# Getting started: from scratch to installation/setup/familiary with the basics '''(I)'''
+## TODO: add picture of resulting graph
+## TODO: clean up separate code
+# &quot;Guidelines when building a Neo app&quot;: what should you keep in mind when you start a from-scratch Neo project? '''(I)'''
+## &quot;Johan sez you have the wrong mindset&quot;
+## &quot;Think of the graph as always being in RAM&quot;
+## Implementing a domain model on top of Neo
+## &quot;No store/load pattern, use transactions&quot;
+## How to structure the graph
+### &quot;Keep everything connected&quot;
+#### ref node, subref node
+#### w/o indexing service, you have two ways to get ahold of a node: through the ref node or by id
+### Use relationships
+#### Tradeoffs between props and rels =&gt; depends on domain model, &quot;whiteboard friendly&quot;
+### One node per domain entity ''instance''
+### Use reltypes
+# A collection of howtos: short descs/tuts on how to accomplish simple tasks '''(I)'''
+## Middle node
+## &quot;How do I find all nodes with a given property value?&quot;
+## &quot;How do I best implement equals() in my POJO domain objects?&quot;
+## Clear store
+## Reltype delete
+## Online backup
+## (Also remember to refer to the guidelines document)
+# Common mistakes: a list of classic Neo mistakes (and their remedies) '''(I)'''
+## Transactions, try-finally, too granular
+## Building an architecture with DTOs
+## Designing a graph with 50M rels on a single node
+## Deadlock stuff
+## (Also remember to refer to the guidelines document)
+# Neo performance guide: how do you design with and use Neo to achieve maximum performance, including configuration tweaks and OS stuff etc '''(I)'''
+## Larger Java heap, explain memory management
+## C/OS heap, check db size
+## Transactions
+## Performance numbers
+## Second-level caching, &quot;equals&quot;
+## Good disks
+## Neo primitives' lifecycle
+# API reference '''(I)'''
+# Components documentation '''(I)'''
+# &quot;The Neo Philosophy&quot; '''(I)'''
+## Only assumption of a generic concept is id
+## &quot;Rels are semantic indexes&quot; 
+## Associations are inherently typed, hence reltypes
+# Example app '''(II)'''
+# Tutorial?: step-by-step introduction of the API and building a smaller app '''(II)'''
+# Informal netbase definition (later)
+# RDF alignment (later)</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo OSGi Shell</title>
+    <id>158</id>
+    <redirect />
+    <revision>
+      <id>1347</id>
+      <timestamp>2009-06-17T13:53:53Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Neo OSGi Shell]] moved to [[OSGi Shell]]</comment>
+      <text xml:space="preserve" bytes="24">#REDIRECT [[OSGi Shell]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neo Performance Guide</title>
+    <id>213</id>
+    <redirect />
+    <revision>
+      <id>2242</id>
+      <timestamp>2010-02-16T11:46:39Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Neo Performance Guide]] moved to [[Neo4j Performance Guide]]</comment>
+      <text xml:space="preserve" bytes="37">#REDIRECT [[Neo4j Performance Guide]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Neoclipse Guide</title>
+    <id>127</id>
+    <redirect />
+    <revision>
+      <id>991</id>
+      <timestamp>2008-11-06T14:31:05Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Neoclipse Guide]] moved to [[Neoclipse]]: makes it easier to link to it from text in the wiki</comment>
+      <text xml:space="preserve" bytes="23">#REDIRECT [[Neoclipse]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Online Backup HA</title>
+    <id>170</id>
+    <revision>
+      <id>2630</id>
+      <timestamp>2010-03-30T14:06:37Z</timestamp>
+      <contributor>
+        <username>Tobias</username>
+        <id>15</id>
+      </contributor>
+      <comment>/* Starting the master */</comment>
+      <text xml:space="preserve" bytes="3461">&lt;blockquote class=&quot;intro&quot;&gt;
+This page will teach you how to use the Neo4j online backup component to emulate high availability behavior.
+&lt;/blockquote&gt;
+
+== Set up the environment ==
+
+The online backup utility can be used to synchronize a destination Neo4j database from a source Neo4j database. This can further be used to emulate &quot;high availability&quot; (HA) having a master replicating changes to read only slaves. All writes must go through the master and the slaves will be read only.
+
+To get started add the neo4j-online-backup component as a Maven dependency:
+
+&lt;pre class=&quot;brush: xml&quot;&gt;
+    &lt;dependency&gt;
+    	&lt;groupId&gt;org.neo4j&lt;/groupId&gt;
+    	&lt;artifactId&gt;neo4j-online-backup&lt;/artifactId&gt;
+    	&lt;version&gt;0.6-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/pre&gt;
+
+You can also [http://m2.neo4j.org/org/neo4j/neo4j-online-backup/ download] the component as a jar file.
+
+== Starting the master ==
+
+The master will be registered in your application/service and needs to be assigned a port to listen for slave requests.
+
+&lt;pre class=&quot;brush: java&quot;&gt;
+    import org.neo4j.onlinebackup.ha.Master;
+    import org.neo4j.graphdb.GraphDatabaseService;
+    ...
+
+        Master master = new Master( &quot;var/master&quot;, neo4jConfig, 9050 );
+        GraphDatabaseService graphDb = master.getGraphDbService();
+        // start using GraphDatabaseService in read/write mode
+        ...
+        //
+        master.shutdown();
+&lt;/pre&gt;
+
+== Starting a slave ==
+
+''The first step in creating a slave is to shut down the master (if it's running) and make a full copy of the master database to a new location where the slave will run).''
+
+Changes performed on the master will be pushed out to the slaves when the logical log is rotated. Logs will get rotated once they hit the configured size or you can do it by invoking a method on the master:
+
+&lt;pre class=&quot;brush: java&quot;&gt;
+        // push latest changes to all slaves
+        master.rotateLogAndPushToSlaves();
+&lt;/pre&gt;
+
+The slaves will not see the changes right away since the operation is asynchronous (the method will return before slaves gets the data and changes on slaves will appear in the near future).
+
+=== Starting a backup slave ===
+
+A backup slave is just a slave which sits and waits for the master to push data to it. Creating a backup slave and connect it to the master (master ip and port):
+
+&lt;pre class=&quot;brush: java&quot;&gt;
+        final BackupSlave slave = new BackupSlave( &quot;var/slave&quot;, neo4jConfig, 
+            masterIpAddress, 9050 );
+        Runtime.getRuntime().addShutdownHook( new Thread() {
+            @Override public void run() {
+                slave.shutdown();
+            }
+        } );
+        // Wait for user input or until the JVM is shut down.
+        System.in.read();
+&lt;/pre&gt;
+
+If the master goes down and you'd like to use the backup slave as master instead, you'll have to shut down the backup slave and then start up your application as usual using the backup slave's database (or a copy of it).
+
+=== Starting a read-only slave ===
+
+A read-only slave is a slave which you can use to make read requests, but no modifications to. Creating a read-only slave and connect it to the master (master ip and port):
+
+&lt;pre class=&quot;brush: java&quot;&gt;
+        ReadOnlySlave slave = new ReadOnlySlave( &quot;var/slave&quot;, neo4jConfig, 
+            masterIpAddress, 9050 );
+        GraphDatabaseService graphDb = slave.getGraphDbService();
+        // start using GraphDatabaseService, read only mode
+        ...
+        //
+        slave.shutdown();
+&lt;/pre&gt;</text>
+    </revision>
+  </page>
+  <page>
+    <title>Onlinebackup</title>
+    <id>148</id>
+    <redirect />
+    <revision>
+      <id>1268</id>
+      <timestamp>2009-05-04T00:28:20Z</timestamp>
+      <contributor>
+        <username>Emil</username>
+        <id>2</id>
+      </contributor>
+      <comment>[[Onlinebackup]] moved to [[Online Backup]]</comment>
+      <text xml:space="preserve" bytes="27">#REDIRECT [[Online Backup]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Outdated Pages</title>
+    <id>199</id>
+    <revision>
+      <id>4295</id>
+      <timestamp>2011-09-29T12:34:13Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <text xml:space="preserve" bytes="1848">* [[Advanced Design Guide]]
+* [[Assembly]] - maybe not the page, but the examples it refers to
+* [[Code Contributor's Guide]] contains a dead link to [[Code of Conduct]]
+* [[Configuration Settings]] and [[Neo Performance Guide]] refers to a neo4j distro [http://dist.neo4j.org/neo_default.props default config file], should it be called neo4j_default.props instead?
+* [[Design Guide]] has a dead link to [[Neo Meta Model]]
+* Images in all IMDB pages needs to be updated
+* We have some pages about the OM2 project: [[IdmNeoRepo Code Introduction]], [[Om2 Component Overview]], [[Om2 Code Introduction]], [[Om2 Documentation]], [[Om2 Message Log Use Cases]], [[Om2 Tasks]], [[Using NeoRepo]]. It wouldn't be right to update the OM2 components at the moment, I'd guess and this makes those wiki pages outdated. Also they're somewhat unrelated to everything else in here.
+* [[Inferencing In Neo Rdf]] needs update as soon as all referenced components, such as '''neo-rdf''', '''neo-meta''' a.s.o. have been refactored/renamed
+* [[JayWay Neo Workshop Lab Instructions]] refers to an example in Johans laboratory which isn't even maven:ized. So if this page should live on I think we should maven:ize it and update this page. (''EDIT'' delete in favor of [[Workshop]]?)
+* I have no clue what [[Neo Howtos]] is about and what it tries to solve. Anyone?
+* I don't think [[Neo Rdf Node Layout]] will be missed if we delete it.
+* [[Neo Workshop]] and [[JayWay Neo Workshop]] are quite similar, merge? (''EDIT'' delete in favor of [[Workshop]]?)
+* [[Neo Workshop Lab Instructions]] is an extended [[JayWay Neo Workshop Lab Instructions]]. Is the &quot;JayWay&quot; version really needed? Also it refers to an unmaven:ized project in Johans laboratory. Maven:ize and update wiki, or delete? (''EDIT'' delete in favor of [[Workshop]]?)
+* [[New Neo Meta Model]] needs work</text>
+    </revision>
+  </page>
+  <page>
+    <title>Spring And Neo</title>
+    <id>212</id>
+    <redirect />
+    <revision>
+      <id>2236</id>
+      <timestamp>2010-02-16T06:31:14Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>[[Spring And Neo]] moved to [[Spring And Neo4j]]</comment>
+      <text xml:space="preserve" bytes="30">#REDIRECT [[Spring And Neo4j]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Spring And Neo4j</title>
+    <id>26</id>
+    <revision>
+      <id>4307</id>
+      <timestamp>2011-11-03T20:17:55Z</timestamp>
+      <contributor>
+        <username>AndreasKollegger</username>
+        <id>553</id>
+      </contributor>
+      <text xml:space="preserve" bytes="2660">&lt;blockquote class=&quot;warning&quot;&gt;
+Deprecated: Please see [http://spring.neo4j.org Spring Data Neo4j] for the latest information about enjoying Neo4j from the comfort of Spring.
+&lt;/blockquote&gt;
+
+Spring and Neo4j can be integrated in a couple of different ways. Either one can use [http://www.springsource.org/spring-data/neo4j Spring Data Graph] (annotation-based programming model), or one can use the Neo4j APIs with Spring transaction integration.
+
+= Spring Data Graph =
+
+[http://www.springsource.org/spring-data/neo4j Spring Data Graph] is a library providing an annotation-based programming model for Neo4j. This should prove very familiar for users coming from JPA. Spring Data Graph even integrates with JPA, enabling users to model data across JPA and Neo4j.
+
+See the [https://github.com/SpringSource/spring-data-graph quick start guide] for a 5 minute intro.
+
+= Transaction integration =
+
+The transaction integration can be configured in the following ways.
+
+== Configuring Spring with Neo4j's transaction manager ==
+
+&lt;pre class=&quot;brush: xml&quot;&gt;
+&lt;bean id=&quot;graphDb&quot; class=&quot;org.neo4j.kernel.EmbeddedGraphDatabase&quot;
+    destroy-method=&quot;shutdown&quot; lazy-init=&quot;false&quot;&gt;
+    &lt;constructor-arg&gt;
+        &lt;value&gt;${neo4j.store}&lt;/value&gt;
+    &lt;/constructor-arg&gt;
+&lt;/bean&gt;
+
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+&lt;alias name=&quot;neo4jTransactionManager&quot; alias=&quot;transactionManager&quot;/&gt;
+
+&lt;bean id=&quot;neo4jTransactionManagerService&quot;
+class=&quot;org.neo4j.kernel.impl.transaction.SpringTransactionManager&quot;&gt;
+    &lt;constructor-arg ref=&quot;graphDb&quot;/&gt;
+&lt;/bean&gt;
+&lt;bean id=&quot;neo4jUserTransactionService&quot;
+class=&quot;org.neo4j.kernel.impl.transaction.UserTransactionImpl&quot;&gt;
+    &lt;constructor-arg ref=&quot;graphDb&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;neo4jTransactionManager&quot;
+class=&quot;org.springframework.transaction.jta.JtaTransactionManager&quot;&gt;
+    &lt;property name=&quot;transactionManager&quot; ref=&quot;neo4jTransactionManagerService&quot;/&gt;
+    &lt;property name=&quot;userTransaction&quot; ref=&quot;neo4jUserTransactionService&quot;/&gt;
+&lt;/bean&gt;
+&lt;/pre&gt;
+
+== Configuring Spring and Neo4j with a third-party transaction manager ==
+
+&lt;pre class=&quot;brush: xml&quot;&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.transaction.jta.JtaTransactionManager&quot;&gt;
+    &lt;property name=&quot;transactionManager&quot;&gt;
+        &lt;bean id=&quot;jotm&quot; class=&quot;org.springframework.data.graph.neo4j.transaction.JotmFactoryBean&quot;/&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;bean class=&quot;org.neo4j.kernel.EmbeddedGraphDatabase&quot; destroy-method=&quot;shutdown&quot;&gt;
+    &lt;constructor-arg value=&quot;${neo4j.store}&quot;/&gt;
+    &lt;constructor-arg&gt;
+        &lt;map&gt;
+           &lt;entry key=&quot;tx_manager_impl&quot; value=&quot;spring-jta&quot;/&gt;
+        &lt;/map&gt;
+    &lt;/constructor-arg&gt;
+&lt;/bean&gt;
+
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+&lt;/pre&gt;</text>
+    </revision>
+  </page>
+  <page>
+    <title>Spring Data Graph</title>
+    <id>477</id>
+    <redirect />
+    <revision>
+      <id>3946</id>
+      <timestamp>2011-04-18T19:16:26Z</timestamp>
+      <contributor>
+        <username>Dmontag</username>
+        <id>462</id>
+      </contributor>
+      <comment>[[Spring Data Graph]] moved to [[Spring Datastore Graph]]</comment>
+      <text xml:space="preserve" bytes="36">#REDIRECT [[Spring Datastore Graph]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Spring Datastore Graph</title>
+    <id>298</id>
+    <revision>
+      <id>4309</id>
+      <timestamp>2011-11-03T20:25:08Z</timestamp>
+      <contributor>
+        <username>AndreasKollegger</username>
+        <id>553</id>
+      </contributor>
+      <text xml:space="preserve" bytes="593">&lt;blockquote class=&quot;warning&quot;&gt;
+Deprecated: Please see [http://spring.neo4j.org Spring Data Neo4j] for the latest information about enjoying Neo4j from the comfort of Spring.
+&lt;/blockquote&gt;
+
+The [http://www.springsource.org/spring-data Spring Data project] aims to bring the convenience of the Spring programming model to NOSQL databases. Spring Data Graph was developed in tight collaboration with SpringSource, and provides an annotation-based programming model for graph databases. Please see the [http://github.com/SpringSource/spring-data-graph Github page] for a quick getting started guide.</text>
+    </revision>
+  </page>
+  <page>
+    <title>Transitioning To Index Framework</title>
+    <id>338</id>
+    <revision>
+      <id>3718</id>
+      <timestamp>2011-03-01T08:05:04Z</timestamp>
+      <contributor>
+        <username>Mattias</username>
+        <id>6</id>
+      </contributor>
+      <text xml:space="preserve" bytes="1207">Existing data in indexes created/populated with IndexService (LuceneIndexService, LuceneFulltextIndexService) cannot be migrated to the new [[Index_Framework|integrated index framework]] since the original values aren't stored in the indexes, only compacted representations of them. To talk in Lucene terms: [http://lucene.apache.org/java/3_0_2/api/core/org/apache/lucene/document/Field.Store.html#NO Store.NO]. The only way is to repopulate your integrated indexes from scratch.
+
+==Feature matrix==
+
+Here are some mindset mappings from IndexService to new index framework.
+
+{|
+! Feature
+! [[Indexing_with_IndexService|IndexService]]
+! [[Index Framework|Integrated Index Framework]]
+|-
+! Fulltext index
+| IndexService fulltextIndex = new LuceneFulltextIndexService( graphDb );
+| Index&lt;Node&gt; fulltextIndex = graphDb.index().forNodes( &quot;my fulltext index&quot;, Map&lt;String,String&gt;{&quot;type&quot;:&quot;fulltext&quot;} );
+|-
+! Batch insertion
+| LuceneIndexBatchInserter batchIndex = new LuceneIndexBatchInserterImpl( batchInserter );
+| BatchInserterIndexProvider provider = new LuceneBatchInserterIndexProvider( batchInserter );
+BatchInserterIndex personsIndex = provider.nodeIndex( &quot;persons&quot;, Map&lt;String,String&gt;{&quot;type&quot;:&quot;exact&quot;} );
+|}</text>
+    </revision>
+  </page>
+  <page>
+    <title>Transitioning To New Index</title>
+    <id>339</id>
+    <redirect />
+    <revision>
+      <id>3595</id>
+      <timestamp>2011-01-04T15:46:07Z</timestamp>
+      <contributor>
+        <username>Tobias</username>
+        <id>15</id>
+      </contributor>
+      <comment>[[Transitioning To New Index]] moved to [[Transitioning To Index Framework]]</comment>
+      <text xml:space="preserve" bytes="46">#REDIRECT [[Transitioning To Index Framework]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Traversal</title>
+    <id>201</id>
+    <revision>
+      <id>2640</id>
+      <timestamp>2010-03-31T15:29:16Z</timestamp>
+      <contributor>
+        <username>Tobias</username>
+        <id>15</id>
+      </contributor>
+      <minor/>
+      <comment>/* See also */</comment>
+      <text xml:space="preserve" bytes="4900">&lt;blockquote&gt;
+This page is in work right now. Don't consider it correct until this notice is deleted.
+&lt;/blockquote&gt;
+
+= Summary =
+&lt;blockquote class=&quot;summary&quot;&gt;
+* Traversals visit each node in the closure '''exactly once'''. For nodes with multiple paths '''only one path''' will be traversed.
+* Traversals are lazy.
+* Traversals need a transactional context and are done in the same thread.
+* [http://components.neo4j.org/neo4j-kernel/apidocs/index.html?org/neo4j/graphdb/Traverser.html API reference]
+&lt;/blockquote&gt;
+
+= Traversal Java API Notes =
+
+The &lt;code&gt;[http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/Node.html#traverse(org.neo4j.graphdb.Traverser.Order,%20org.neo4j.graphdb.StopEvaluator,%20org.neo4j.graphdb.ReturnableEvaluator,%20org.neo4j.graphdb.RelationshipType,%20org.neo4j.graphdb.Direction) Node.traverse(...)]&lt;/code&gt; methods creates a new &lt;code&gt;[http://components.neo4j.org/neo4j-kernel/apidocs/index.html?org/neo4j/graphdb/Traverser.html Traverser]&lt;/code&gt; object and positions it at the start node (the node on which the traverse method was invoked), then returns it immediately. The Traverser object traverses the graph lazily as the nodes are requested through its [http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/Traverser.html#iterator() Iterator].
+
+=== The Traverser object ===
+
+Traversals are always executed in the same thread as the &lt;code&gt;next()&lt;/code&gt; method of its iterator. This means that it is executed within the same transactional context as the code that iterates through the returnable nodes of the traversal. The implications of this is that iterating over a &lt;code&gt;Traverser&lt;/code&gt; has to be done in the context of a transaction, and that a &lt;code&gt;Traverser&lt;/code&gt; object is not safe to share between multiple threads.
+
+The &lt;code&gt;Traverser&lt;/code&gt; extends the &lt;code&gt;Iterable&lt;/code&gt; interface to make it convenient to use in the Java for-each loop, but due to the fact that you sometimes want to be able to access the &lt;code&gt;TraversalPosition&lt;/code&gt; of the current node, it is not possible to implement the &lt;code&gt;Iterable&lt;/code&gt; interface to it's full extent. Usually the semantics of an &lt;code&gt;Iterable&lt;/code&gt; is something that can be iterated through over and over again, often even with multiple simultaneous iterators, but a &lt;code&gt;Traverser&lt;/code&gt; can only be iterated through once.
+&lt;pre class=&quot;brush: java&quot;&gt;
+Traverser traverser = startNode.traverse( ... );
+for ( Node node : traverser )
+{
+    TraversalPosition currentPosition = traverser.currentPosition();
+    // Do something with the node and/or its position in the traversal
+}
+&lt;/pre&gt;
+
+The object returned by &lt;code&gt;[http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/Traverser.html#currentPosition() traverser.currentPosition()]&lt;/code&gt; is guaranteed to reflect the position of the last node returned by the iterator, even after the iterator has moved on to the next node. This means that in order to get the accurate current position you need to invoke &lt;code&gt;traverser.currentPosition()&lt;/code&gt; within the loop, but on the other hand it also means that the &lt;code&gt;TraversalPosition&lt;/code&gt; object can be kept around and used later on without having to deep copy it.
+
+=== The ReturnableEvaluator callback ===
+
+=== The StopEvaluator callback ===
+
+=== TraversalPosition objects ===
+
+* The [http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/TraversalPosition.html#depth() depth()] method returns the traversal depth of the position it represents. Note that the depth of a node is dependent on the traversal order, see the [[Gotchas#Calculating_path_distances|gotcha]] related to this.
+* The [http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/TraversalPosition.html#returnedNodesCount() returnedNodesCount()] method returns the number of nodes that had been returned up until the point when the TraversalPosition object was created.
+
+= Traversal use cases =
+
+=== Extracting a subgraph ===
+
+To extract a full subgraph including '''all''' the relationships between the included nodes, you can
+use a traverser to get the nodes, but will then have to use the different
+[http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/Node.html#getRelationships%28%29 Node.getRelationships()]
+methods to also get all relationships.
+
+Depending on the exact use case you may have to deal with leaf and non-leaf nodes in different ways.
+For example, in a visualization you maybe want to include relationships between nodes at the maximum depth,
+even though that would exceed the maximum depth by one. This applies to a social network visualization, where
+end users may find it strange if two persons are visible in the graph, but not their (existing) connection!
+
+= See also =
+* [[Transactions]]
+* [[Indexing with IndexService]]
+* [[Graph-algo|Graph Algorithms]]
+* [[Gremlin]]
+* [[Graph Pattern Matching]]
+* [[Sparql Support|SPARQL Support]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>UDC</title>
+    <id>291</id>
+    <revision>
+      <id>3898</id>
+      <timestamp>2011-03-28T13:50:03Z</timestamp>
+      <contributor>
+        <username>Andersn</username>
+        <id>14</id>
+      </contributor>
+      <comment>Replacing page with 'The contents of this page has been moved to the [http://docs.neo4j.org/chunked/snapshot/usage-data-collector.html Neo4j Manual].'</comment>
+      <text xml:space="preserve" bytes="128">The contents of this page has been moved to the [http://docs.neo4j.org/chunked/snapshot/usage-data-collector.html Neo4j Manual].</text>
+    </revision>
+  </page>
+  <page>
+    <title>Udc</title>
+    <id>289</id>
+    <redirect />
+    <revision>
+      <id>3198</id>
+      <timestamp>2010-10-08T08:19:15Z</timestamp>
+      <contributor>
+        <username>Andres</username>
+        <id>552</id>
+      </contributor>
+      <comment>Redirecting to [[UDC]]</comment>
+      <text xml:space="preserve" bytes="17">#REDIRECT [[UDC]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>User Meetings</title>
+    <id>378</id>
+    <revision>
+      <id>3820</id>
+      <timestamp>2011-03-16T13:47:17Z</timestamp>
+      <contributor>
+        <username>Peterneubauer</username>
+        <id>418</id>
+      </contributor>
+      <comment>/* New York City and Boston */</comment>
+      <text xml:space="preserve" bytes="854">There's an initiative of Neo4j users and developers to organize personal (&quot;Beer and Talk&quot;) meetings.
+
+A couple of locations are in discussion:
+
+* Malmö/Stockholm (Sweden)
+* London (UK)
+* Berlin/Frankfurt (Germany)
+* San Francisco/Bay Area (USA West Coast)
+* Washington D.C./Philadelphia/Boston/Northern Virginia (USA East Cost)
+* Bologna/Milano (Italy)
+* Amsterdam (Netherlands)
+* Granada (Spain)
+
+If you like to join, use the [http://lists.neo4j.org/ Neoj4 User's mailing list] for now.
+
+== Washington Metropolitan Area ==
+
+Where:
+
+When:
+
+Attending: Andreas Kollegger
+
+== Scandinavia - Malmö/ Copenhagen Area ==
+
+Where:
+
+When: 
+
+Attending: Peter Neubauer
+
+== Germany ==
+
+Where: Berlin or Frankfurt
+
+When: 
+
+Attending: Axel Morgner
+
+== New York City and Boston ==
+
+Where: 
+
+When: 
+
+Attending: Todd Stavish
+
+== Philadelphia ==
+
+Where: Chariot Solutions?</text>
+    </revision>
+  </page>
+  <page>
+    <title>Visualization options for Neo4j graphs</title>
+    <id>224</id>
+    <redirect />
+    <revision>
+      <id>2519</id>
+      <timestamp>2010-03-19T08:55:10Z</timestamp>
+      <contributor>
+        <username>Peterneubauer</username>
+        <id>418</id>
+      </contributor>
+      <comment>[[Visualization options for Neo4j graphs]] moved to [[Visualization options for graphs]]</comment>
+      <text xml:space="preserve" bytes="46">#REDIRECT [[Visualization options for graphs]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Workshop Extra</title>
+    <id>218</id>
+    <revision>
+      <id>2800</id>
+      <timestamp>2010-04-21T14:32:59Z</timestamp>
+      <contributor>
+        <username>Mattias</username>
+        <id>6</id>
+      </contributor>
+      <text xml:space="preserve" bytes="2953">This continues the ordinary [[Workshop]] and is optional. The assignments here are a little more complex, but can be good to go through if you'd like some extra tinkering with Neo4j.
+
+= Assignment 5: Security =
+
+The purpose of this assignment is to see what happens when an application built using Neo4j starts to evolve.
+
+To simulate this we use the simple &quot;file system&quot; created in the previous example (copied to &lt;code&gt;org.neo4j.examples.workshopextra.tutor.security&lt;/code&gt; package) and evolve it by adding security. For simplicity we will only add a &quot;security check&quot; when listing the files and the security check will only be of type &quot;access granted/denied&quot;.
+
+Even though this is just a simple example it is hierarchical in that access rights are added/removed when traversing the file system/principal hierarchy. So if a principal (P1) has granted access to &lt;code&gt;/home/neo&lt;/code&gt;, (P1) (and all its members) have access to everything underneath it. And if a principal (P2) which is a member of (P1) has denied access to, say &lt;code&gt;/home/neo/readme.txt&lt;/code&gt; (P2) will still have granted access to everything under &lt;code&gt;/home/neo&lt;/code&gt; '''except''' that file.
+
+If you compare the code in this assignment with the previous you'll see that some things have been added, f.ex:
+* &lt;code&gt;NodeWrapper&lt;/code&gt; class which is a little abstract class and is one example of how you can make wrapping nodes in objects a little easier. It has nice overridden functions like &lt;code&gt;hashCode&lt;/code&gt; and &lt;code&gt;equals&lt;/code&gt;.
+* The addition of &lt;code&gt;Principal&lt;/code&gt; and &lt;code&gt;PrincipalFactory&lt;/code&gt; classes, which are quite similar to &lt;code&gt;File&lt;/code&gt; and &lt;code&gt;FileFactory&lt;/code&gt;.
+* Files which have no parent (roots) have a relationship to the [http://api.neo4j.org/current/org/neo4j/graphdb/GraphDatabaseService.html#getReferenceNode() reference node] so that they can be found later on. The same goes for the principals.
+
+In addition to that there's a new &lt;code&gt;org.neo4j.examples.workshopextra.tutor.security.SecurityManager&lt;/code&gt; class which manages the access rights that principals have in the file system.
+
+This is an example of how the node space will look:
+
+[[Image:SecurityManager.png]]
+
+== Tasks ==
+
+* Implement the &lt;code&gt;TODO's&lt;/code&gt; found in &lt;code&gt;SecurityManager&lt;/code&gt; and &lt;code&gt;PrincipalFactory&lt;/code&gt; so that the &lt;code&gt;TestSecurity&lt;/code&gt; test runs without errors.
+* Run your code with f.ex. &lt;code&gt;scripts/list-access-files Neo&lt;/code&gt; or any of the other principals: &lt;code&gt;All, Root, Regular, Neo, Trinity&lt;/code&gt;. Some examples:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+$ scripts/list-access-files All
+/home
+/home/neo
+/home/neo/application.jar
+/home/neo/readme.txt
+/tmp
+
+$ scripts/list-access-files Trinity
+/home
+/tmp
+&lt;/pre&gt;
+* Mess around with the access rights in &lt;code&gt;org.neo4j.examples.workshopextra.tutor.security.ListFileStructure&lt;/code&gt; and see what happens. Could you make &lt;code&gt;Trinity&lt;/code&gt; have access to &lt;code&gt;/home/neo/application.jar&lt;/code&gt;?</text>
+    </revision>
+  </page>
+</mediawiki>
