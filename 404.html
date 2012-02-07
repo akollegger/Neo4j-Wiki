@@ -24,6 +24,10 @@
 	<link rel="stylesheet" href="stylesheets/base.css">
 	<link rel="stylesheet" href="stylesheets/skeleton.css">
 	<link rel="stylesheet" href="stylesheets/layout.css">
+	<style type="text/css">
+		p {text-align: center;}
+	</style>
+	
 
 	<!-- Favicons
 	================================================== -->
@@ -32,6 +36,19 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
+	<!-- Script it up
+	================================================== -->
+    <script src="javascripts/zepto.min.js" ></script>
+    <script src="javascripts/underscore-min.js" ></script>
+    
+    <!-- redirect map -->
+    <script type="text/javascript">
+    	var redirect_map = [
+    		{ path:".*foo.html", redirect_to:"http://google.com", title:"Try googling that." },
+			{ path:".*", redirect_to:"http://neo4j.org", title:"Neo4j Home", explanation:" That&apos;s where you&apos;ll find the latest information about Neo4j." }
+    	];
+    </script>
+		
 </head>
 <body>
 
@@ -39,11 +56,26 @@
 	================================================== -->
 	<div class="container">
 		<h1 style="margin-top: 100px; text-align:center">Sorry. Couldn't Find That Page!</h1>
-    <p style="text-align:center">
-    Please see <a href="http://wiki.neo4j.org">the wiki home page</a> or visit <a href="http://neo4j.org">neo4j.org</a> for the latest about Neo4j.
-    </p>
+		
+		<p>Please see <a href="http://wiki.neo4j.org">the wiki home page</a> for some helpful information.</p>
+    
+    	<div id="known_redirect"/>
+    
 	</div>
 
+    <script type="text/javascript">
+      $(document).ready(function () {
+      	var requested_url = document.URL;
+      	var recommended_redirect = _.find(redirect_map, function(possible_redirect) {
+      		var path_pattern=new RegExp(possible_redirect.path);
+	      	return path_pattern.test(requested_url);
+      	});
+      	var snippet = _.template("<p>For that specific page, you might find <a href=\"<%=redirect_to%>\"><%= title %></a> helpful.<%= explanation %></p>");
+      
+      	$('#known_redirect').append(snippet(recommended_redirect));
+      });
+    </script>
+	
 <!-- End Document
 ================================================== -->
 </body>
